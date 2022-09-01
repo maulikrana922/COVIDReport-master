@@ -1,0 +1,14 @@
+stages:
+    - build
+
+build:
+    image: reactnativecommunity/react-native-android
+    stage: build
+    script:
+        - yarn install
+        -  chmod +x gradlew
+        #- ./gradlew assembleMyBuild --stacktrace
+        - gradle wrapper
+    artifacts:
+        paths:
+            - android/app/build/outputs/
