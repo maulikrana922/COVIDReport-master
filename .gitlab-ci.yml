@@ -11,4 +11,4 @@ build:
         - gradle wrapper
     artifacts:
         paths:
-            - android/app/build/outputs/
+            - app/build/
