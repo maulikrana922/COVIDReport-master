@@ -5,10 +5,10 @@ build:
     image: reactnativecommunity/react-native-android
     stage: build
     script:
-        - yarn install
-        -  chmod +x gradlew
+        #- yarn install
+        #-  chmod +x gradlew
         #- ./gradlew assembleMyBuild --stacktrace
-        - yarn build
+        - gradl build
     artifacts:
         paths:
             - app/build/
