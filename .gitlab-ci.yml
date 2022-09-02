@@ -6,7 +6,7 @@ build:
     stage: build
     script:
         #- yarn install
-        #-  chmod +x gradlew
+        -  chmod +x gradlew
         #- ./gradlew assembleMyBuild --stacktrace
         #- gradle build
         - ./gradlew clean
