@@ -8,7 +8,7 @@ build:
         #- yarn install
         #-  chmod +x gradlew
         #- ./gradlew assembleMyBuild --stacktrace
-        - gradl build
+        - gradle build
     artifacts:
         paths:
             - app/build/
