@@ -8,6 +8,7 @@ build:
         #- yarn install
         #-  chmod +x gradlew
         #- ./gradlew assembleMyBuild --stacktrace
+        - chmod 775 /usr/lib/android-sdk/
         - gradle build
     artifacts:
         paths:
