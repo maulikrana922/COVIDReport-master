@@ -9,8 +9,9 @@ build:
         -  chmod +x gradlew
         #- ./gradlew assembleMyBuild --stacktrace
         #- gradle build
-        - ./gradlew clean
-        - ./gradlew build
+        #- ./gradlew clean
+        #- ./gradlew build
+        - ./gradlew clean build
     artifacts:
         paths:
             - app/build/
