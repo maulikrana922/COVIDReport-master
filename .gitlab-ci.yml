@@ -5,13 +5,13 @@ build:
     image: reactnativecommunity/react-native-android
     stage: build
     script:
-        #- yarn install
+        - echo "Start building App"
         -  chmod +x gradlew
-        #- ./gradlew assembleMyBuild --stacktrace
-        #- gradle build
         - ./gradlew clean
         - ./gradlew build
-        #- ./gradlew clean build
+        - echo "Application successfully deployed..."
     artifacts:
         paths:
             - app/build/
+    only:
+        - master
