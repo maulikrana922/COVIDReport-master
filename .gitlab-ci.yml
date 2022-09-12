@@ -9,7 +9,7 @@ build:
         -  chmod +x gradlew
         - ./gradlew clean
         - ./gradlew build
-        - echo "Application successfully deployed..."
+        - echo "Application successfully deployed...."
     artifacts:
         paths:
             - app/build/
