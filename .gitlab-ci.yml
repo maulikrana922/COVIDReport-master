@@ -15,9 +15,20 @@ build:
         - export ANDROID_HOME=/usr/lib/android-sdk
         - wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip
         - unzip commandlinetools-linux-6609375_latest.zip -d cmdline-tools
-        #- sudo mv cmdline-tools $ANDROID_HOME/
-        #- export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$PATH
+        - sudo mv cmdline-tools $ANDROID_HOME/
+        - export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$PATH
         - yes | sdkmanager --licenses -y
+        - sudo chmod -R 755 /root/android-sdk-linux
+        - echo "Gradle install"
+        - wget -c https://services.gradle.org/distributions/gradle-7.4.2-bin.zip -P /tmp
+        - sudo unzip -d /opt/gradle /tmp/gradle-7.4.2-bin.zip
+        - ls /opt/gradle
+        - sudo nano /etc/profile.d/gradle.sh
+            export GRADLE_HOME=/opt/gradle/gradle-7.4.2
+            export PATH=${GRADLE_HOME}/bin:${PATH}
+        - sudo chmod +x /etc/profile.d/gradle.sh
+        - source /etc/profile.d/gradle.sh
+        - gradle --version
         - echo "Start building App"
         -  chmod +x gradlew
         - ./gradlew clean
