@@ -6,7 +6,6 @@ build:
     stage: build
     script:
         - echo "Androied Studio setup"
-        - sudo usermod -a -G sudo gitlab-runner
         - sudo su 
         - sudo apt update  
         - sudo apt install openjdk-11-jdk -y 
