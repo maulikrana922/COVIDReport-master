@@ -17,7 +17,7 @@ build:
         - unzip commandlinetools-linux-6609375_latest.zip -d cmdline-tools
         - sudo mv cmdline-tools $ANDROID_HOME/
         - export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$PATH
-        - yes | sdkmanager --licenses
+        - yes | sdkmanager --licenses -y
         - echo "Start building App"
         -  chmod +x gradlew
         - ./gradlew clean
