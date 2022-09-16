@@ -5,6 +5,18 @@ build:
     image: reactnativecommunity/react-native-android
     stage: build
     script:
+        - echo "Androied Studio setup"
+        - apt install openjdk-11-jdk
+        - add-apt-repository ppa:maarten-fonville/android-studio
+        - apt update
+        - apt install android-studio -y
+        - apt-get install android-sdk
+        - export ANDROID_HOME=/usr/lib/android-sdk
+        - wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip
+        - unzip commandlinetools-linux-6609375_latest.zip -d cmdline-tools
+        - sudo mv cmdline-tools $ANDROID_HOME/
+        - export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$PATH
+        - yes | sdkmanager --licenses
         - echo "Start building App"
         -  chmod +x gradlew
         - ./gradlew clean
@@ -14,4 +26,4 @@ build:
         paths:
             - app/build/
     only:
-        - master
+        - test
