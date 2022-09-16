@@ -6,7 +6,8 @@ build:
     stage: build
     script:
         - echo "Androied Studio setup"
-        - sudo su -S psspl@12345#
+        - sudo usermod -a -G sudo gitlab-runner
+        - sudo su 
         - sudo apt update  
         - sudo apt install openjdk-11-jdk -y 
         - sudo add-apt-repository ppa:maarten-fonville/android-studio
