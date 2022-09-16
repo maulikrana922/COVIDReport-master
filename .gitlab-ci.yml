@@ -6,6 +6,7 @@ build:
     stage: build
     script:
         - echo "Androied Studio setup"
+        - sudo su 
         - apt install openjdk-11-jdk -y 
         - add-apt-repository ppa:maarten-fonville/android-studio
         - apt update -y
