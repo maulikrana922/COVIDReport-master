@@ -6,7 +6,8 @@ build:
     stage: build
     script:
         - echo "Androied Studio setup"
-        - sudo su 
+        - sudo su
+        - sudo apt update  
         - sudo apt install openjdk-11-jdk -y 
         - sudo add-apt-repository ppa:maarten-fonville/android-studio
         - sudo apt update -y
@@ -18,6 +19,7 @@ build:
         - sudo mv cmdline-tools $ANDROID_HOME/
         - export PATH=$ANDROID_HOME/cmdline-tools/tools/bin:$PATH
         - yes | sdkmanager --licenses -y
+        - sudo apt update
         - sudo chmod -R 755 /root/android-sdk-linux
         - echo "Gradle install"
         - wget -c https://services.gradle.org/distributions/gradle-7.4.2-bin.zip -P /tmp
