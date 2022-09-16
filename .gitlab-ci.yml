@@ -9,9 +9,9 @@ build:
         - sudo su 
         - sudo apt install openjdk-11-jdk -y 
         - sudo add-apt-repository ppa:maarten-fonville/android-studio
-        - apt update -y
-        - apt install android-studio -y
-        - apt-get install android-sdk
+        - sudo apt update -y
+        - sudo apt install android-studio -y
+        - sudo apt-get install android-sdk
         - export ANDROID_HOME=/usr/lib/android-sdk
         - wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip
         - unzip commandlinetools-linux-6609375_latest.zip -d cmdline-tools
