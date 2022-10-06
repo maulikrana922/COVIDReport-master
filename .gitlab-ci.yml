@@ -1,17 +1,53 @@
-stages:
-    - build
+image: jangrewe/gitlab-ci-android
 
-build:
-    image: reactnativecommunity/react-native-android
-    stage: build
-    script:
-        - echo "Start building App"
-        -  chmod +x gradlew
-        - ./gradlew clean
-        - ./gradlew build
-        - echo "Application successfully deployed...."
-    artifacts:
-        paths:
-            - app/build/
-    only:
-        - master
+stages:
+- build
+- test
+- release
+- deploy
+
+lintDebug:
+  stage: build
+  script:
+  - echo "Start building App"
+  - chmod +x gradlew
+  - ./gradlew init
+  - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+
+assembleDebug:
+  stage: build
+  script:
+  - echo "Start Debug App"
+  - chmod +x gradlew
+  - ./gradlew assembleDebug
+
+testDebug:
+  stage: test
+  script:
+  - echo "Start Test App"
+  - chmod +x gradlew 
+  - ./gradlew  test
+
+assembleRelease:
+  stage: release
+  script:
+  - echo "Start Release App"
+  - chmod +x gradlew
+  - ./gradlew assembleRelease
+  artifacts:
+    paths:
+    - app/build/
+    - CHANGELOG
+    expire_in: 1 week
+
+deploy:
+  stage: deploy
+  script :
+    --release.dir=app/build/outputs/apk/release
+    --app.name=namastey
+    --dropbox.token=$DROPBOX_TOKEN
+    --dropbox.folder=Namastey
+    --changelog.file=CHANGELOG
+    --template.file=TEMPLATE
+    --zapier.hook=$ZAPIER_EMAIL_HOOK
+    --email.to=$EMAIL_TARGET
