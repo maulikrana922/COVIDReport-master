@@ -12,7 +12,6 @@ lintDebug:
   - echo "Start building App"
   - chmod +x gradlew
   - ./gradlew init
-  - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
 assembleDebug:
   stage: build
