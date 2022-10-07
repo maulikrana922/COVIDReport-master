@@ -15,7 +15,6 @@ assembleRelease:
   artifacts:
     paths:
     - app/build/
-    - CHANGELOG
     expire_in: 1 week
 
 deploy:
