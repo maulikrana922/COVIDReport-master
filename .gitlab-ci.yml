@@ -14,7 +14,7 @@ assembleRelease:
   - chmod +x gradlew
   - ./gradlew assembleRelease
   artifacts:
-    name: "COVIDReport"
+    name: "COVIDReport.apk"
     paths:
     - app/build/outputs/apk/release
     expire_in: 1 week
