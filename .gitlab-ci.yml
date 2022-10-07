@@ -6,27 +6,6 @@ stages:
 - release
 - deploy
 
-lintDebug:
-  stage: build
-  script:
-  - echo "Start building App"
-  - chmod +x gradlew
-  - ./gradlew init
-
-assembleDebug:
-  stage: build
-  script:
-  - echo "Start Debug App"
-  - chmod +x gradlew
-  - ./gradlew assembleDebug
-
-testDebug:
-  stage: test
-  script:
-  - echo "Start Test App"
-  - chmod +x gradlew 
-  - ./gradlew  test
-
 assembleRelease:
   stage: release
   script:
@@ -42,7 +21,7 @@ assembleRelease:
 deploy:
   stage: deploy
   script :
-    --release.dir=app/build/outputs/apk/release
+    --release.dir=app/build/
     --app.name=COVIDReport
     --dropbox.token=$DROPBOX_TOKEN
     --dropbox.folder=COVIDReport
