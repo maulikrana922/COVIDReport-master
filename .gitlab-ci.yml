@@ -20,7 +20,8 @@ assembleRelease:
 
 
 send_email:
-    script: curl -s --user "api:$MAILGUN_API_KEY" 
+  stage: send_email
+  script: curl -s --user "api:$MAILGUN_API_KEY" 
       -F from='Gitlab <gitlab@example.com>'
       -F to=$GITLAB_USER_EMAIL
       -F subject='Test results'
