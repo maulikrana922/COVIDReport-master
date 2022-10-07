@@ -12,7 +12,7 @@ lintDebug:
   - echo "Start building App"
   - chmod +x gradlew
   - ./gradlew init
-  
+
 assembleDebug:
   stage: build
   script:
@@ -43,9 +43,9 @@ deploy:
   stage: deploy
   script :
     --release.dir=app/build/outputs/apk/release
-    --app.name=namastey
+    --app.name=COVIDReport
     --dropbox.token=$DROPBOX_TOKEN
-    --dropbox.folder=Namastey
+    --dropbox.folder=COVIDReport
     --changelog.file=CHANGELOG
     --template.file=TEMPLATE
     --zapier.hook=$ZAPIER_EMAIL_HOOK
