@@ -15,10 +15,8 @@ assembleRelease:
   - ./gradlew assembleRelease
   artifacts:
     paths:
-    - app/build/
+    - app/build/outputs/apk/release
     expire_in: 1 week
-
-
 
 send_email:
   stage: send_email
@@ -28,4 +26,4 @@ send_email:
       -F to=$GITLAB_USER_EMAIL
       -F subject='Test results + report'
       -F text='Testing some Mailgun awesomeness!'
-      -F attachment='@app/build/outputs/apk/release/app-release-unsigned.apk'
+      -F attachment='@app/build/outputs/apk/release.zip'
