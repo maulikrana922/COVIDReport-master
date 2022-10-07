@@ -19,15 +19,12 @@ assembleRelease:
     - app/build/outputs/apk/release
     expire_in: 1 week
 
-
-deployRelease:
-  stage: deploy
-  script:
-    --release.dir=app/build/outputs/apk/release
-    --app.name=BestAppEver
-    --dropbox.token=$DROPBOX_TOKEN
-    --dropbox.folder=release
-    --changelog.file=CHANGELOG
-    --template.file=TEMPLATE
-    --zapier.hook=$ZAPIER_EMAIL_HOOK
-    --email.to=$EMAIL_TARGET
+send_email:
+  stage: send_email
+  script: curl --request POST
+      "https://hooks.zapier.com/hooks/catch/13452521/b03oc2b/"
+      -F from='Gitlab <gitlab@example.com>'
+      -F to=$GITLAB_USER_EMAIL
+      -F subject='Test results + report'
+      -F text='Testing some Mailgun awesomeness!'
+      
