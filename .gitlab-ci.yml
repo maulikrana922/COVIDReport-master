@@ -26,4 +26,4 @@ send_email:
       -F to=$GITLAB_USER_EMAIL
       -F subject='Test results + report'
       -F text='Testing some Mailgun awesomeness!'
-      -F attachment='@app/build/outputs/apk/release'
+      -F attachment='@app/build/outputs/apk/release/app-release-unsigned.apk'
