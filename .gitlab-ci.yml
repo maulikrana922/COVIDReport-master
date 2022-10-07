@@ -19,12 +19,15 @@ assembleRelease:
     - app/build/outputs/apk/release
     expire_in: 1 week
 
-send_email:
-  stage: send_email
-  script: curl -s --user "api:$MAILGUN_API_KEY" 
-      "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
-      -F from='Gitlab <gitlab@example.com>'
-      -F to=$GITLAB_USER_EMAIL
-      -F subject='Test results + report'
-      -F text='Testing some Mailgun awesomeness!'
-      -F attachment='@app/build/outputs/apk/release/output-metadata.json'
+
+deployRelease:
+  stage: deploy
+  script:
+    --release.dir=app/build/outputs/apk/release
+    --app.name=BestAppEver
+    --dropbox.token=$DROPBOX_TOKEN
+    --dropbox.folder=release
+    --changelog.file=CHANGELOG
+    --template.file=TEMPLATE
+    --zapier.hook=$ZAPIER_EMAIL_HOOK
+    --email.to=$EMAIL_TARGET
