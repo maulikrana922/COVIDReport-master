@@ -25,6 +25,7 @@ send_email:
   script: curl -s --user 'api:$MAILGUN_API_KEY' 
       https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages 
       -F from='Gitlab <gitlab@example.com>' 
-      -F to=$GITLAB_USER_EMAIL 
+      
+      -F to=maulikrana922@gmail.com 
       -F subject='Test results'
       -F text='Testing some Mailgun awesomeness!'
