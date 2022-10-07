@@ -5,6 +5,7 @@ stages:
 - test
 - release
 - deploy
+- send_email
 
 assembleRelease:
   stage: release
