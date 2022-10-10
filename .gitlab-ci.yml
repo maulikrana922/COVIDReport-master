@@ -23,7 +23,7 @@ assembleRelease:
 empaquetar:
   
   script:
-    - zip -r content.zip app/build/outputs/apk/release
+    - zip -r content.zip app
   artifacts:
     paths:
       - app/build/outputs/apk/content.zip
