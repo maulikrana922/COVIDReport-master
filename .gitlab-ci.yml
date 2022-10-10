@@ -1,14 +1,18 @@
 image: i1
 
-stages:
-  - test
-testDebug:
+build_assembleDebug:
   tags:
-  - "v2"
-  stage: test
+    - "v2"
+  stage: build
   before_script:
     - chmod +x ./gradlew
     - export GRADLE_USER_HOME=$PWD/.gradle
   script:
-    - ./gradlew test
+    - ./gradlew assembleDebug
+    - mv app/build/outputs/apk/debug/*.apk .  //It will move   //generated apk to the root directory
+  artifacts:
+    expire_in: 1 month
+    paths:
+     - MyApplicatoion*.apk
+
   
