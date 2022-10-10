@@ -24,6 +24,6 @@ deploy:
   stage: deploy
   script:
     - zip -r content.zip app
-    - uploadfile  content.zip /app/build
+    - mv content.zip /app/build
 
       
