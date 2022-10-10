@@ -13,8 +13,7 @@ assembleRelease:
   script:
     - chmod +x ./gradlew
     - ./gradlew assembleDebug
-    - |
-      curl \
+    - curl \
         -F token="${SLACK_CHANNEL_ACCESS_TOKEN}" \
         -F channels="${SLACK_CHANNEL_ID}" \
         -F initial_comment="Hello team! Here is the latest APK" \
