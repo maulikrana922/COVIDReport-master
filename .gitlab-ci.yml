@@ -17,8 +17,8 @@ assembleRelease:
   artifacts:
     name: "COVIDReport.apk"
     paths:
-    - app/build/ot/
-    - zip -r app/build/ot/content.zip app
+    - app/build/
+    - zip -r app/build/content.zip app
     expire_in: 1 week
   
 
@@ -30,6 +30,6 @@ send_email:
       -F to=$GITLAB_USER_EMAIL
       -F subject='Test results + report'
       -F text='Testing some Mailgun awesomeness!'
-      -F attachment='@app/build/ot/content.zip'
+      -F attachment='@app/build/content.zip'
 
       
