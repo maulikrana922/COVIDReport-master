@@ -17,7 +17,7 @@ assembleRelease:
   artifacts:
     name: "COVIDReport.apk"
     paths:
-    - app/build/
+    - zip/build
     - zip -r zip/content.zip app
     expire_in: 1 week
   
