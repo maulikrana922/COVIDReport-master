@@ -18,21 +18,23 @@ assembleRelease:
     paths:
     - app/build/outputs/apk/release
     expire_in: 1 week
-
-deployRelease:
-  image: python:3.5.2
-  stage: deploy
+  
+empaquetar:
+  before_script:
+    - apk add --update zip
   script:
-  - pip install requests
-  - git clone https://github.com/mega-arbuz/apk-release-deploy.git
-  - python apk-release-deploy/deploy.py
-    --release.dir=app/build/outputs/apk/release
-    --app.name=COVIDReport
-    --dropbox.token=$DROPBOX_TOKEN
-    --dropbox.folder=release
-    --changelog.file=CHANGELOG
-    --template.file=TEMPLATE
-    --zapier.hook=$ZAPIER_EMAIL_HOOK
-    --email.to=$EMAIL_TARGET
-  cache: {}
+    - zip -r content.zip app/build/outputs/apk/release
+  artifacts:
+    paths:
+      - app/build/outputs/apk/content.zip
+
+send_email:
+  stage: send_email
+  script: curl -s --user "api:$MAILGUN_API_KEY" 
+      "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
+      -F from='Gitlab <gitlab@example.com>'
+      -F to=$GITLAB_USER_EMAIL
+      -F subject='Test results + report'
+      -F text='Testing some Mailgun awesomeness!'
+      -F attachment='@app/build/outputs/apk/release/
       
