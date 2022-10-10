@@ -17,13 +17,12 @@ assembleRelease:
   artifacts:
     name: "COVIDReport.apk"
     paths:
-    - app/build/
+    - app/build/outputs/apk/release
     expire_in: 1 week
   
 deploy:
   stage: deploy
   script:
-    - zip -r content.zip app/build/outputs/apk/release
-    - mv content.zip /app/build
+    - zip -r /app/build/outputs/apk/release/content.zip /app/build/outputs/apk/release
 
       
