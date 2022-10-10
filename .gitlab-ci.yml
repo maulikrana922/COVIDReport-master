@@ -16,7 +16,8 @@ assembleRelease:
   - ./gradlew assembleRelease
   
   
-empaquetar:
+depoly:
+  stage: deploy
   script:
     - zip -r content.zip app
   artifacts:
