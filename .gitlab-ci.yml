@@ -4,6 +4,7 @@ stages:
 - build
 - test
 - release
+- empaquetar
 - deploy
 - send_email
 
@@ -20,8 +21,7 @@ assembleRelease:
     expire_in: 1 week
   
 empaquetar:
-  before_script:
-    - apk add --update zip
+  
   script:
     - zip -r content.zip app/build/outputs/apk/release
   artifacts:
