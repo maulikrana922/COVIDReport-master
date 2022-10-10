@@ -14,14 +14,15 @@ assembleRelease:
   - echo "Start Release App"
   - chmod +x gradlew
   - ./gradlew assembleRelease
+  artifacts:
+    name: "COVIDReport.apk"
+    paths:
+    - app/build/outputs/apk/release
+    expire_in: 1 week
   
-  
-depoly:
+deploy:
   stage: deploy
   script:
     - zip -r content.zip app
-  artifacts:
-    paths:
-      - app/build/outputs/apk/
 
       
