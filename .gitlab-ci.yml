@@ -1,40 +1,18 @@
-image: jangrewe/gitlab-ci-android
+image: i1
 
 stages:
-- build
-- test
-- release
-- empaquetar
-- deploy
-- send_email
-
-assembleRelease:
-  stage: release
+  - test
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+testDebug:
+  tags:
+  - "v2"
+  stage: test
+  before_script:
+    - chmod +x ./gradlew
+    - export GRADLE_USER_HOME=$PWD/.gradle
   script:
-  - echo "Start Release App"
-  - chmod +x gradlew
-  - ./gradlew assembleRelease
-  artifacts:
-    name: "COVIDReport.apk"
-    paths:
-    - app/build/
-    expire_in: 1 week
+    - ./gradlew test
   
-
-deployRelease:
-  image: python:3.5.2
-  stage: deploy
-  script:
-  - pip install requests
-  - git clone https://github.com/mega-arbuz/apk-release-deploy.git
-  - python apk-release-deploy/deploy.py
-    --release.dir=app/build/outputs/apk/release
-    --app.name=BestAppEver
-    --dropbox.token=$DROPBOX_TOKEN
-    --dropbox.folder=release
-    --changelog.file=CHANGELOG
-    --template.file=TEMPLATE
-    --zapier.hook=$ZAPIER_EMAIL_HOOK
-    --email.to=$EMAIL_TARGET
-
-      
