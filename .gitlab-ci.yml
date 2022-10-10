@@ -22,6 +22,6 @@ depoly:
     - zip -r content.zip app
   artifacts:
     paths:
-      - app/build/outputs/apk/content.zip
+      - app/build/outputs/apk/
 
       
