@@ -1,18 +1,30 @@
-image: wizardly_galois
+image: jangrewe/gitlab-ci-android
 
-build_assembleDebug:
-  tags:
-    - "v2"
-  stage: build
-  before_script:
-    - chmod +x ./gradlew
-    - export GRADLE_USER_HOME=$PWD/.gradle
+stages:
+- build
+- test
+- release
+- empaquetar
+- deploy
+- send_email
+
+assembleRelease:
+  stage: release
   script:
-    - ./gradlew assembleDebug
-    - mv app/build/outputs/apk/debug/*.apk .  //It will move   //generated apk to the root directory
+  - echo "Start Release App"
+  - chmod +x gradlew
+  - ./gradlew assembleRelease
   artifacts:
-    expire_in: 1 month
+    name: "COVIDReport.apk"
     paths:
-     - MyApplicatoion*.apk
-
-  
+    - app/build/outputs/apk/release
+    expire_in: 1 week
+send_email:
+  stage: send_email
+  script: curl -s --user "api:$MAILGUN_API_KEY" 
+      "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
+      -F from='Gitlab <gitlab@example.com>'
+      -F to=$GITLAB_USER_EMAIL
+      -F subject='Test results + report'
+      -F text='Testing some Mailgun awesomeness!'
+      -F "file=@$(find app/build/outputs/apk/release/)" \
