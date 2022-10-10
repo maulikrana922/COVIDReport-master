@@ -11,20 +11,14 @@ stages:
 assembleRelease:
   stage: release
   script:
-  - echo "Start Release App"
-  - chmod +x gradlew
-  - ./gradlew assembleRelease
+    - ./gradlew assembleDebug
+    - |
+      curl \
+        -F token="${SLACK_CHANNEL_ACCESS_TOKEN}" \
+        -F channels="${SLACK_CHANNEL_ID}" \
+        -F initial_comment="Hello team! Here is the latest APK" \
+        -F "file=@$(find app/build/outputs/apk/debug -name 'MyApp*')" \
+        https://slack.com/api/files.upload
   artifacts:
-    name: "COVIDReport.apk"
     paths:
-    - app/build/outputs/apk/release
-    expire_in: 1 week
-send_email:
-  stage: send_email
-  script: curl -s --user "api:$MAILGUN_API_KEY" 
-      "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages"
-      -F from='Gitlab <gitlab@example.com>'
-      -F to=$GITLAB_USER_EMAIL
-      -F subject='Test results + report'
-      -F text='Testing some Mailgun awesomeness!'
-      -F "file=@$(find app/build/outputs/apk/release/)" \
+      - app/build/outputs/apk/debug
