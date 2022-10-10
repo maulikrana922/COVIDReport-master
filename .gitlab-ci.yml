@@ -23,6 +23,6 @@ assembleRelease:
 deploy:
   stage: deploy
   script:
-    - zip -r /app/build/outputs/apk/release/content.zip app/build/outputs/apk/release
+    - zip -r /app/build/outputs/apk/release/content.zip app
 
       
