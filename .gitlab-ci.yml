@@ -11,14 +11,21 @@ stages:
 assembleRelease:
   stage: release
   script:
-    - chmod +x ./gradlew
-    - ./gradlew assembleDebug
-    - curl \
-        -F token="${SLACK_CHANNEL_ACCESS_TOKEN}" \
-        -F channels="${SLACK_CHANNEL_ID}" \
-        -F initial_comment="Hello team! Here is the latest APK" \
-        -F "file=@$(find app/build/outputs/apk/debug -name 'MyApp*')" \
-        https://slack.com/api/files.upload
+  - echo "Start Release App"
+  - chmod +x gradlew
+  - ./gradlew assembleRelease
   artifacts:
+    name: "COVIDReport.apk"
     paths:
-      - app/build/outputs/apk/debug
+    - app/build/
+    expire_in: 1 week
+  
+
+send_email:
+  stage: send_email
+  script: curl --request POST
+      "https://hooks.zapier.com/hooks/catch/13452521/b03oc2b/"
+      -F from='Gitlab <gitlab@example.com>'
+      -F to=$GITLAB_USER_EMAIL
+      -F subject='Test results + report'
+      -F text='Testing some Mailgun awesomeness!'
