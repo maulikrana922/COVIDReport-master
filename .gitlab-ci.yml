@@ -2,10 +2,6 @@ image: i1
 
 stages:
   - test
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
 testDebug:
   tags:
   - "v2"
