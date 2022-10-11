@@ -5,8 +5,6 @@ stages:
 
 buildProd:
   stage: build
-  only:
-    - release
 
   script:
     - ./gradlew app:assembleProdRelease
@@ -19,8 +17,6 @@ buildProd:
 
 deploy:
   stage: updraft
-  only:
-  - release
 
   script:
   - |
