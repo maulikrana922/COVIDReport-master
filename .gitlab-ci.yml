@@ -2,8 +2,6 @@ stages:
   - build
   - updraft
 
- 
-
 buildProd:
   stage: build
   only:
