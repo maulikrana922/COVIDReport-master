@@ -1,27 +1,38 @@
 image: jangrewe/gitlab-ci-android
+
 stages:
-  - build
-  - updraft
+- build
+- test
+- release
+- empaquetar
+- deploy
+- send_email
 
-buildProd:
-  stage: build
-
+assembleRelease:
+  stage: release
   script:
-    - chmod +x gradlew
-    - ./gradlew assembleRelease
-
+  - echo "Start Release App"
+  - chmod +x gradlew
+  - ./gradlew assembleRelease
   artifacts:
+    name: "COVIDReport.apk"
     paths:
-      - app/build/outputs/apk/prod/release/*.apk
+    - app/build/
+    expire_in: 1 week
+  
 
- 
-
-deploy:
-  stage: updraft
-
+deployRelease:
+  image: python:3.5.2
+  stage: deploy
   script:
-  - |
-    curl \
-      -F whats_new="Gitlab build" \
-      -F "app=@app/build/outputs/apk/ prod/release/android.apk" \
-      -X PUT https://getupdraft.com/api/ app_upload/$UPDRAFT_APP_KEY /$UPDRAFT_API_KEY/
+  - pip install requests
+  - git clone https://github.com/maulikrana922/apk-release-deploy.git
+  - python apk-release-deploy/deploy.py
+    --release.dir=app/build/outputs/apk/release
+    --app.name=BestAppEver
+    --dropbox.token=$DROPBOX_TOKEN
+    --dropbox.folder=release
+    --changelog.file=CHANGELOG
+    --template.file=TEMPLATE
+    --zapier.hook=$ZAPIER_EMAIL_HOOK
+    --email.to=$EMAIL_TARGET
