@@ -8,7 +8,7 @@ buildProd:
 
   script:
     - chmod +x gradlew
-    - ./gradlew app:assembleProdRelease
+    - ./gradlew assembleRelease
 
   artifacts:
     paths:
