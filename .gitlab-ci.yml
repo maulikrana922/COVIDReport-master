@@ -7,6 +7,7 @@ buildProd:
   stage: build
 
   script:
+    - chmod +x gradlew
     - ./gradlew app:assembleProdRelease
 
   artifacts:
