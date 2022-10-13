@@ -22,8 +22,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Creating Dummy Artifacts
-            command:|
-            echo "my artifact file" > /tmp/art-1;
+          command: echo "my artifact file" > /tmp/art-1;
             mkdir /tmp/artifacts;
             echo "my artifact files in a dir" > /tmp/artifacts/art-2;
       - store_artifacts:
