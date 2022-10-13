@@ -22,7 +22,8 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: licenece accept
-          command: yes | sdkmanager --licenses
+          command: apt install sdkmanager
+            yes | sdkmanager --licenses 
       - run:
           name: Creating Dummy Artifacts
           command: ./gradlew assembleRelease > /tmp/art-1;
